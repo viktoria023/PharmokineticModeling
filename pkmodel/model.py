@@ -12,21 +12,16 @@ class Model:
         an example paramter
 
     """
-    def __init__(self, value):
+    def __init__(self, value, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None):
         self.value = value
+        self.Q_p1=Q_p1
+        self.V_c=V_c
+        self.V_p1=V_p1
+        self.CL=CL
+        self.X=X
+        self.k_a=k_a
 
-    # read in input file in correct format (pandas needed?)
-    # ToDO
-    # might be a better ideq to read in the input file outside of model function
-    #this stuff should come from the input to the class
-    model_args = {
-    'name': 'model1',
-    'Q_p1': 1.0,
-    'V_c': 1.0,
-    'V_p1': 1.0,
-    'CL': 1.0,
-    'X': 1.0,
-    }
+    # this stuff should come from the input to the class
 
     # simple intravenous model as from prototype.py
     def dose(t, X):
