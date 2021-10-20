@@ -30,7 +30,7 @@ class Model:
     def ivModel(t, y, self):
         q_c, q_p1 = y
         transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
-        dqc_dt = dose(t, self.X) - q_c / self.V_c * self.CL - transition
+        dqc_dt = self.dose(t, self.X) - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt]
 
@@ -38,7 +38,7 @@ class Model:
     def scModel(t, y, self):
         q_c, q_p1, q_0 = y
         transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
-        dq0_dt = dose(t, self.X) - self.k_a*q_0
+        dq0_dt = self.dose(t, self.X) - self.k_a*q_0
         dqc_dt = self.k_a*q_0 - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt, dq0_dt]
