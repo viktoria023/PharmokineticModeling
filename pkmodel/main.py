@@ -16,10 +16,10 @@ vars = _vars.to_numpy()
 print(vars)
 
 #Selects type of model to use: vars = 'iv' or 'sc'
-model = vars[0][1]
+protocol = vars[0][1]
 
 #Raise error if not 'iv' or 'sc'
-if model not in ['iv','sc']:
+if protocol not in ['iv','sc']:
     raise TypeError("Model should either be intravenous ('iv') or subcutaneous ('sc')")
 
 
@@ -34,14 +34,17 @@ V_p1 = vars[3][1]
 Cl   = vars[4][1]
 x    = vars[5][1]
 k_a  = vars[6][1]
+scheme = vars[7][1]
+stop = vars[7][1]
+tps = vars[8][1]
 
-t = 1
-y = 1
+modelClass = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a,scheme,stop,tps)
 
-iv = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a)
+solution=Solution()
 
-if model == 'iv':
-    odes = iv.ivModel(t,y)
-elif model == 'sc':
-    odes = iv.scModel(t,y)
+if protocol== 'iv':
+    solution.solver_iv(modelClass)
+
+elif protocol == 'sc':
+    solution.solver_sc(modelClass)
 
