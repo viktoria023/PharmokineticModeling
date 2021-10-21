@@ -3,7 +3,6 @@ Where all the files are imported and ran
 """
 
 from model import Model
-from protocol import Protocol
 from solution import Solution
 
 import pandas as pd
