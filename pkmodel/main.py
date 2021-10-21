@@ -3,7 +3,8 @@ Where all the files are imported and ran
 """
 
 from model import Model
-from protocol import Protocol
+#from protocol import Protocol
+#Probably gonna scrap protocol.py
 from solution import Solution
 
 import pandas as pd
@@ -38,10 +39,19 @@ k_a  = vars[6][1]
 t = 1
 y = 1
 
-iv = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a)
+protocol = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a)
 
 if model == 'iv':
-    odes = iv.ivModel(t,y)
+    diffs = protocol.ivModel(t,y)
 elif model == 'sc':
-    odes = iv.scModel(t,y)
+    diffs = protocol.scModel(t,y)
+#diffs is a list.
+#If iv, then it'll have 2 elements
+#if sc, then 3
 
+print(diffs)
+
+#Getting solutions using differentials
+sol = Solution.solve(diffs)
+
+#Graphing
