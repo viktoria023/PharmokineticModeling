@@ -64,8 +64,8 @@ class Model:
         :returns: list with change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1 = y
-        transition = Q_p1 * (q_c / V_c - q_p1 / V_p1)
-        dqc_dt = self.dose(t, X) - q_c / V_c * CL - transition
+        transition = self.Q_p1 * (self.q_c / self.V_c - q_p1 / self.V_p1)
+        dqc_dt = self.dose(t, self.X) - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt]
 
@@ -82,10 +82,8 @@ class Model:
         :returns: list with change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1, q_0 = y
-        transition = Q_p1 * (q_c / V_c - q_p1 / V_p1)
-        dq0_dt = self.dose(t, X) - k_a*q_0
-        dqc_dt = k_a*q_0 - q_c / V_c * CL - transition
+        transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
+        dq0_dt = self.dose(t, self.X) - k_a*q_0
+        dqc_dt = k_a*q_0 - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt, dq0_dt]
-
-    
