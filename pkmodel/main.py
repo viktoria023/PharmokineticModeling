@@ -3,8 +3,6 @@ Where all the files are imported and ran
 """
 
 from model import Model
-#from protocol import Protocol
-#Probably gonna scrap protocol.py
 from solution import Solution
 
 import pandas as pd
@@ -49,9 +47,3 @@ if protocol== 'iv':
 elif protocol == 'sc':
     solution.solver_sc(modelClass)
 
-print(diffs)
-
-#Getting solutions using differentials
-sol = Solution.solve(diffs)
-
-#Graphing
