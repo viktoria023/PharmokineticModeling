@@ -40,7 +40,6 @@ y = 1
 
 iv = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a)
 
-
 if model == 'iv':
     odes = iv.ivModel(t,y)
 elif model == 'sc':
