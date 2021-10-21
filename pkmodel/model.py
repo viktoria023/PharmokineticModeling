@@ -42,14 +42,14 @@ class Model:
         
         :returns: float, amount of drug released at the specified timepoint t
         """
-        if scheme=='clt' and t<stop:
-            return X
-        elif scheme=='hlt':
-            if t%1==0 and t<stop:
-                return X
-        elif scheme=='dt':
-            if t in tps:
-                return X
+        if self.scheme=='clt' and t<self.stop:
+            return self.X
+        elif self.scheme=='hlt':
+            if t%1==0 and t<self.stop:
+                return self.X
+        elif self.scheme=='dt':
+            if t in self.tps:
+                return self.X
         return 0
 
     def ivModel(t, y, self):
@@ -83,7 +83,7 @@ class Model:
         """
         q_c, q_p1, q_0 = y
         transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
-        dq0_dt = self.dose(t, self.X) - k_a*q_0
-        dqc_dt = k_a*q_0 - q_c / self.V_c * self.CL - transition
+        dq0_dt = self.dose(t, self.X) - self.k_a*q_0
+        dqc_dt = self.k_a*q_0 - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt, dq0_dt]
