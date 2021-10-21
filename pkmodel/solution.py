@@ -1,6 +1,8 @@
 #
 # Solution class
 #
+import numpy as np
+import scipy
 
 class Solution:
     """A Pharmokinetic (PK) model solution
