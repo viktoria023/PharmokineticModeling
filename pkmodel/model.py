@@ -8,10 +8,16 @@ class Model:
     Parameters
     ----------
 
-    value: numeric, optional
-        an example parameter to test if class can be called correctly
-    
-
+    value:  numeric, an example parameter to test if class can be called correctly
+    Q_p1:   [mL/h] float, the transition rate between central compartment and peripheral compartment 1
+    V_c:    [mL] float, the volume of the central compartment
+    V_p1:   [mL] float, the volume of the first peripheral compartment
+    CL:     [mL/h] float, the clearance/elimination rate from the central compartment
+    X:      [ng] float, the amount of drug administered per injection
+    k_a:     [/h] float is the absorption rate, only used for the sc dosing
+    scheme: ['clt','hlt','dt'] pattern of dose administration as specified by user. clt = instantaneous limited time, hlt = hourly limited time, dt = defined time points
+    stop:   [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
+    tps:    [h] float, timepoints of dose administration as specified by the user. Only used in 'dt' scheme
     """
     def __init__(self, value, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None):
         self.value = value
@@ -27,15 +33,16 @@ class Model:
 
     def dose(t, self):
         """Definition of dosing scheme
-        Depending on the defined dosing scheme, the function returns the defined dosage X
-        at the  specified timepoints. 
+        Depending on the defined dosing scheme, the function determines the released dosage X
+        at the  specified timepoint. 
 
         Parameters
         ___________
-        t: numeric, timepoint tested by dose function
+        t: [h] float, timepoint tested by dose function
         
+        :returns: float, amount of drug released at the specified timepoint t
         """
-        if scheme=='ilt' and t<stop:
+        if scheme=='clt' and t<stop:
             return X
         elif scheme=='hlt':
             if t%1==0 and t<stop:
@@ -51,9 +58,10 @@ class Model:
 
         Parameters
         ___________
-        t: float, tested timepoint 
-        y: array, 
+        t: [h] float, current timepoint 
+        y: [ng, ng] list, current amount of drug in the compartments
 
+        :returns: list with change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1 = y
         transition = Q_p1 * (q_c / V_c - q_p1 / V_p1)
@@ -64,13 +72,14 @@ class Model:
     # subcutaneous model
     def scModel(t, y, self):
         """Setting up subcatenous model
-        Sets up 2-compartment model 
+        Sets up 3-compartment model, with inital compartment giving off the drug to the central compartment at rate k_a
 
         Parameters
         ___________
-        t: float, tested timepoint 
-        y: array, 
+        t: [h] float, current timepoint 
+        y: [ng, ng, ng] list, current amount of drug in the compartments
 
+        :returns: list with change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1, q_0 = y
         transition = Q_p1 * (q_c / V_c - q_p1 / V_p1)
