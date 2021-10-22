@@ -8,18 +8,18 @@ class Model:
     Parameters
     ----------
 
-    :param value:  numeric, an example parameter to test if class can be called correctly
-    :param Q_p1:   [mL/h] float, the transition rate between central compartment and peripheral compartment 1
-    :param V_c:    [mL] float, the volume of the central compartment
-    :param V_p1:   [mL] float, the volume of the first peripheral compartment
-    :param CL:     [mL/h] float, the clearance/elimination rate from the central compartment
-    :param X:      [ng] float, the amount of drug administered per injection
-    :param k_a:     [/h] float is the absorption rate, only used for the sc dosing
-    :param scheme: ['clt','hlt','dt'] pattern of dose administration as specified by user. clt = instantaneous limited time, hlt = hourly limited time, dt = defined time points
-    :param stop:   [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
-    :param tps:    [h] float, timepoints of dose administration as specified by the user. Only used in 'dt' scheme
+    :argument value:  optional, numeric, an example parameter to test if class can be called correctly
+    :param Q_p1:   required, [mL/h] float, the transition rate between central compartment and peripheral compartment 1
+    :param V_c:    required, [mL] float, the volume of the central compartment
+    :param V_p1:   required, [mL] float, the volume of the first peripheral compartment
+    :param CL:     required, [mL/h] float, the clearance/elimination rate from the central compartment
+    :param X:      required, [ng] float, the amount of drug administered per injection
+    :param k_a:    required for sc dosing, [/h] float is the absorption rate
+    :param scheme: required, ['clt','hlt','dt'], string, pattern of dose administration as specified by user. clt = instantaneous limited time, hlt = hourly limited time, dt = defined time points
+    :param stop:   required, [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
+    :param tps:    required in 'dt' scheme, [h] float, timepoints of dose administration as specified by the user
     """
-    def __init__(self, value, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None):
+    def __init__(self, value=42, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None):
         self.value = value
         self.Q_p1=Q_p1
         self.V_c=V_c
@@ -38,7 +38,7 @@ class Model:
 
         Parameters
         ----------
-        :param t: [h] float, timepoint tested by dose function
+        :param t: required, [h] float, timepoint tested by dose function
         
         :returns: float, amount of drug released at the specified timepoint t
         """
@@ -59,10 +59,10 @@ class Model:
 
         Parameters
         ----------
-        :param t: [h] float, current timepoint 
-        :param y: [ng, ng] list, current amount of drug in the compartments
+        :param t: required, [h] float, current timepoint 
+        :param y: required, [ng, ng] list, current amount of drug in the compartments
 
-        :returns: list with change of drug concentrations in respective compartments as a derivative of the time
+        :returns: list, change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1 = y
         transition = self.Q_p1 * (self.q_c / self.V_c - q_p1 / self.V_p1)
@@ -73,15 +73,15 @@ class Model:
     # subcutaneous model
     def scModel(t, y, self):
         """Setting up subcatenous model
-        
+
         Sets up 3-compartment model, with inital compartment giving off the drug to the central compartment at rate k_a
 
         Parameters
         ----------
-        :param t: [h] float, current timepoint 
-        :param y: [ng, ng, ng] list, current amount of drug in the compartments
+        :param t: required, [h] float, current timepoint 
+        :param y: required, [ng, ng, ng] list, current amount of drug in the compartments
 
-        :returns: list with change of drug concentrations in respective compartments as a derivative of the time
+        :returns: list, change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1, q_0 = y
         transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)

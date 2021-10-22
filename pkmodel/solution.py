@@ -12,7 +12,7 @@ class Solution:
     Parameters
     ----------
 
-    :param value:  numeric, an example parameter to test if class can be called correctly
+    :param value:  optional, numeric, an example parameter to test if class can be called correctly
     """
     def __init__(self, value=44):
         self.value = value
@@ -25,7 +25,7 @@ class Solution:
         Parameters
         ----------
 
-        :param modelClass: class, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
+        :object modelClass: required, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
 
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
         """ 
@@ -47,7 +47,7 @@ class Solution:
         Parameters
         ----------
 
-        :param modelClass: class, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
+        :object modelClass: required, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
 
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
         """
@@ -65,13 +65,14 @@ class Solution:
     def plotter(self, sol, model_name, save="no"):
         """A method to visualise the ode solutions using the matplotlib library.
 
-        :parameters: 
-                sol, required, object : the ode solution returned by solution.solver_sc or solver_iv : 
-                save, required, string, yes or no- if yes, plot saved in PNG
-                model_name, string, required : "iv" or "sc" 
+        Parameters
+        ----------
+        :object sol: required, the ode solution returned by solution.solver_sc or .solver_iv : 
+        :param save: required, string, yes or no- if yes, plot saved in PNG
+        :param model_name: required, string : "iv" or "sc" 
 
         :returns: 
-                a plot window or a an output file, output_plot.png
+                a plot window or an output file, output_plot.png
         """
         self.sol = sol
         self.model_name = model_name
