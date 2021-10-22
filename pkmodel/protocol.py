@@ -31,6 +31,7 @@ class Protocol:
         #check if only 'iv' or 'sc' are given and nothing else
 
         #Variables for model
+        self.model_type = (self.vars[0][1])
         self.Q_p1 = float(self.vars[1][1])
         self.V_c = float(self.vars[2][1])
         self.V_p1 = float(self.vars[3][1])

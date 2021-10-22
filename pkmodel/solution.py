@@ -54,8 +54,8 @@ class Solution:
 
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
         """
-        t_eval = np.linspace(0, 1, 1000)
-        y0 = np.array([0.0, 0.0])
+        t_eval = np.linspace(0, 10, 10000)
+        y0 = np.array([0.0, 0.0,0.0])
 
         sol = scipy.integrate.solve_ivp(
         fun=lambda t, y: modelClass.scModel(t, y),
@@ -83,7 +83,8 @@ class Solution:
         fig, ax1 = plt.subplots()
         ax1.plot(sol.t, sol.y[0, :], label = model_name + '- q_c',linewidth=3)
         ax1.plot(sol.t, sol.y[1, :], label = model_name + '- q_p1',linewidth=3)
-        
+        if model_name=='sc':
+            ax1.plot(sol.t, sol.y[2, :], label = model_name + '- q_0',linewidth=3)
         dosage_curve=model.dose(sol.t)
         ax2=ax1.twinx()
         ax2.plot(sol.t,dosage_curve,'--',label='dosage curve',linewidth=2,color='green')
