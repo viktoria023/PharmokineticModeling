@@ -2,7 +2,7 @@
 # Solution class
 #
 import numpy as np
-import scipy
+import scipy.integrate
 #from model import *
 import matplotlib.pylab as plt
 

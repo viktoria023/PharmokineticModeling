@@ -1,11 +1,11 @@
 ﻿Column1,Column2
-modelType,sc
+modelType,iv
 Q_p1,1
 V_c,1
 V_p1,1
 CL,1
 X,1
 k_a,1
-scheme,None
+scheme,clt
 stop,None
 tps=None
