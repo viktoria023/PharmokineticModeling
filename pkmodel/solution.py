@@ -87,11 +87,11 @@ class Solution:
         dosage_curve=model.dose(sol.t)
         ax2=ax1.twinx()
         ax2.plot(sol.t,dosage_curve,'--',label='dosage curve',linewidth=2,color='green')
-        ax1.legend(loc=1,fontsize=14)
-        ax2.legend(loc=2,fontsize=14)
-        ax1.set_ylabel('drug mass [ng]',fontsize=14)
-        ax2.set_ylabel('drug dosage [ng/h]',fontsize=14)
-        ax1.set_xlabel('time [h]',fontsize=14)
+        ax1.legend(loc=1,fontsize=15)
+        ax2.legend(loc=2,fontsize=15)
+        ax1.set_ylabel('drug mass [ng]',fontsize=15)
+        ax2.set_ylabel('drug dosage [ng/h]',fontsize=15)
+        ax1.set_xlabel('time [h]',fontsize=15)
         
         if (save == "yes"):
             plt.savefig("output_plot.png")

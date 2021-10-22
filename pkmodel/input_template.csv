@@ -6,7 +6,7 @@ V_p1,1
 CL,1
 X,4
 k_a,1
-scheme,"clt"
+scheme,"dt"
 start,5
 stop,6
 tps,"4, 6"
