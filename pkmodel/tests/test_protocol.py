@@ -1,4 +1,4 @@
-from pkmodel import Protocol
+from protocol import Protocol
 
 import unittest
 
