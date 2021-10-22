@@ -1,10 +1,11 @@
 # Small Software Engineering Project: Pharmokinetic Modelling
 # DTP 2021 - Group 5
-This repository solves pharmokinetic models when given the type of model and initial values. 
 
-**How to use the repository:**
+This python library solves and visualises a pharmokinetic model. The user can specify the type of drug adminstration (intravenous or subcutaneouos) and an input file containing values for the model variables (Q_p1, V_c, V_p1, CL, X and k_a; a template file is provided here:  https://github.com/viktoria023/PharmokineticModeling/blob/master/pkmodel/input_template.csv). The model is constructed and solved using SciPy integration solver. A plot is generated to visualise the drug concentrations in various compartments over time. The plot can optionally be saved to a file.
 
-Users will want to provide an input file 'input.txt', which contains the model type (iv or sc for intravenous or subutaneous drug administration respectively), and the desired values for the variables used by the ODE model (Q_p1, V_c, V_p1, CL, X and k_a). The model will then be constructed and solved using the scipy solver. The user will be provided with a plot of the drug concentrations in the various compartments over time. A template on how to construct the input file can be found in the repository as 'input_template.txt'. The whole model can be run by simply using the main.py file.
+**How to use the package**
+
+python PharmokineticModeling.py
 
 **Developer info (how to get started working with this repository):**
 
@@ -12,4 +13,5 @@ The repository has a modular structure, with the user file input.txt being read 
 
 **Links:**
 
+(open in a new tab!)
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/viktoria023/PharmokineticModeling/master/docs/source/_build/index.html
