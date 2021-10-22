@@ -32,14 +32,14 @@ class Solution:
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
 
         """ 
-        t_eval = np.linspace(0, 1, 1000)
+        t_eval = np.linspace(0, 10, 10000)
         y0 = np.array([0.0, 0.0])
 
         sol = scipy.integrate.solve_ivp(
         fun=lambda t, y: modelClass.ivModel(t, y),
         t_span=[t_eval[0], t_eval[-1]],
-        y0=y0, t_eval=t_eval
-        )
+        y0=y0, t_eval=t_eval,
+        max_step=0.001)
         return sol
 
     def solver_sc(self, modelClass):
@@ -65,7 +65,7 @@ class Solution:
         return sol
 
     #fig = plt.figure()
-    def plotter(self, sol, model_name, save="no"):
+    def plotter(self, model, sol, model_name, save="no"):
         """A method to visualise the ode solutions using the matplotlib library.
 
         Parameters
@@ -80,12 +80,18 @@ class Solution:
         """
         self.sol = sol
         self.model_name = model_name
-        fig = plt.figure()
-        plt.plot(sol.t, sol.y[0, :], label = model_name + '- q_c')
-        plt.plot(sol.t, sol.y[1, :], label = model_name + '- q_p1')
-        plt.legend()
-        plt.ylabel('drug mass [ng]')
-        plt.xlabel('time [h]')
+        fig, ax1 = plt.subplots()
+        ax1.plot(sol.t, sol.y[0, :], label = model_name + '- q_c',linewidth=3)
+        ax1.plot(sol.t, sol.y[1, :], label = model_name + '- q_p1',linewidth=3)
+        
+        dosage_curve=model.dose(sol.t)
+        ax2=ax1.twinx()
+        ax2.plot(sol.t,dosage_curve,'--',label='dosage curve',linewidth=2,color='green')
+        ax1.legend(loc=1,fontsize=15)
+        ax2.legend(loc=2,fontsize=15)
+        ax1.set_ylabel('drug mass [ng]',fontsize=15)
+        ax2.set_ylabel('drug dosage [ng/h]',fontsize=15)
+        ax1.set_xlabel('time [h]',fontsize=15)
         
         if (save == "yes"):
             plt.savefig("output_plot.png")

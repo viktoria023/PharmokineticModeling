@@ -10,7 +10,7 @@ import pandas as pd
 #Imports csv and stores as pandas data frame
 UserVariables = Protocol("pkmodel/input_template.csv")
 
-modelClass = Model(None, UserVariables.Q_p1, UserVariables.V_c, UserVariables.V_p1, UserVariables.Cl, UserVariables.x, UserVariables.k_a, UserVariables.scheme, UserVariables.stop, UserVariables.tps)
+modelClass = Model(None, UserVariables.Q_p1, UserVariables.V_c, UserVariables.V_p1, UserVariables.Cl, UserVariables.x, UserVariables.k_a, UserVariables.scheme,UserVariables.start, UserVariables.stop, UserVariables.tps)
 
 solution=Solution()
 
@@ -20,4 +20,4 @@ if UserVariables.protocol== 'iv':
 elif UserVariables.protocol == 'sc':
     sols = solution.solver_sc(modelClass)
 
-solution.plotter(sols, 'iv', 'no')
+solution.plotter(modelClass,sols, 'iv', 'no')
