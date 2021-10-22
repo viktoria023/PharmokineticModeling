@@ -7,5 +7,6 @@ CL,1
 X,1
 k_a,1
 scheme,
-stop,0.8
-tps=None
+start=1
+stop,1.2
+tps="[1,3]"

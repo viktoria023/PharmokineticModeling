@@ -37,6 +37,7 @@ class Protocol:
         self.x = float(vars[5][1])
         self.k_a = float(vars[6][1])
         self.scheme = vars[7][1]
-        self.stop = float(vars[8][1])
-        self.tps = vars[9][1]
+        self.start=vars[8][1]
+        self.stop = float(vars[9][1])
+        self.tps = vars[10][1]
 
