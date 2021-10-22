@@ -3,7 +3,7 @@ import pandas as pd
 
 import unittest
 
-test_file_1 = '../input_template.csv'
+test_file_1 = 'pkmodel/input_template.csv'
 
 class ProtocolTest(unittest.TestCase):
     """
@@ -13,7 +13,7 @@ class ProtocolTest(unittest.TestCase):
         """
         Tests Protocol creation.
         """
-        with unittest.AssertRaises(TypeError):
-            main = Protocol(test_file_1)
+        #with self.assertRaises(TypeError):
+        main = Protocol(test_file_1)
                 
 
