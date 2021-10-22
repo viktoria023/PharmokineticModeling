@@ -1,7 +1,7 @@
 #
 # Model class
 #
-
+import numpy as np
 class Model:
     """A Pharmokinetic (PK) model.
 
@@ -31,7 +31,22 @@ class Model:
         self.stop=stop
         self.scheme=scheme
         self.tps=tps
-
+    def instantaneous_dose(self,t):
+        #Compute the dose function at time t for a instantaneous dosage scheme.
+        #The dosage function is computed as a smooth approximation of a train of spikes 
+        s=0.05 #controls the width of each pek
+        dose=0
+        for t0 in self.tps:
+            new_peak=self.X*np.exp(-(t-t0)**2/(2*s**2))
+            dose+=new_peak
+        return dose
+    def continous_dose(self,t):
+        #Compute the dose function at time t for a continous dosage scheme between a starting and stopping time.
+        #The dosage function is computed as a smooth approximation of a boxcar function 
+        k=10
+        sigmoid_1=self.X/(1+np.exp(-k*(t-self.start)))
+        sigmoid_2=-self.X/(1+np.exp(-k*(t-self.stop)))+self.X
+        return (sigmoid_1+sigmoid_2)/2
     def dose(self, t):
         """Definition of dosing scheme
         Depending on the defined dosing scheme, the function determines the released dosage X
@@ -43,16 +58,13 @@ class Model:
         
         :returns: float, amount of drug released at the specified timepoint t
         """
-        if self.scheme=='clt' and t<self.stop:
-            return self.X
-        elif self.scheme=='hlt':
-            if t%1==0 and t<self.stop:
-                return self.X
+        if self.scheme=='clt':
+            return self.continous_dose(t)
         elif self.scheme=='dt':
-            if t in self.tps:
-                return self.X
+            return self.instantaneous_dose(t)
         else:
-            return self.X
+            return 0    
+   
 
     def ivModel(self, t, y):
         """Setting up intravenous model
