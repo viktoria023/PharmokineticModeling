@@ -31,10 +31,10 @@ class Model:
         self.scheme=scheme
         self.tps=tps
 
-    def dose(t, self):
-        """Definition of dosing scheme.
-
-        Depending on the defined dosing scheme, the function determines the released dosage X at the  specified timepoint. 
+    def dose(self, t):
+        """Definition of dosing scheme
+        Depending on the defined dosing scheme, the function determines the released dosage X
+        at the  specified timepoint. 
 
         Parameters
         ----------
@@ -50,10 +50,11 @@ class Model:
         elif self.scheme=='dt':
             if t in self.tps:
                 return self.X
-        return 0
+        else:
+            return self.X
 
-    def ivModel(t, y, self):
-        """Setting up intravenous model.
+    def ivModel(self, t, y):
+        """Setting up intravenous model
 
         Sets up 2-compartment model 
 
@@ -65,13 +66,13 @@ class Model:
         :returns: list, change of drug concentrations in respective compartments as a derivative of the time
         """
         q_c, q_p1 = y
-        transition = self.Q_p1 * (self.q_c / self.V_c - q_p1 / self.V_p1)
-        dqc_dt = self.dose(t, self.X) - q_c / self.V_c * self.CL - transition
+        transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
+        dqc_dt = self.dose(t) - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt]
 
     # subcutaneous model
-    def scModel(t, y, self):
+    def scModel(self, t, y):
         """Setting up subcatenous model
 
         Sets up 3-compartment model, with inital compartment giving off the drug to the central compartment at rate k_a
