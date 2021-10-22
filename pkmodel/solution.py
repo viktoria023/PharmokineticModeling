@@ -32,7 +32,7 @@ class Solution:
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
 
         """ 
-        t_eval = np.linspace(0, 1, 1000)
+        t_eval = np.linspace(0, 10, 1000)
         y0 = np.array([0.0, 0.0])
 
         sol = scipy.integrate.solve_ivp(

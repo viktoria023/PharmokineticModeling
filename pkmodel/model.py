@@ -43,10 +43,10 @@ class Model:
     def continous_dose(self,t):
         #Compute the dose function at time t for a continous dosage scheme between a starting and stopping time.
         #The dosage function is computed as a smooth approximation of a boxcar function 
-        k=10
+        k=20
         sigmoid_1=self.X/(1+np.exp(-k*(t-self.start)))
         sigmoid_2=-self.X/(1+np.exp(-k*(t-self.stop)))+self.X
-        return (sigmoid_1+sigmoid_2)/2
+        return np.sqrt((sigmoid_1*sigmoid_2))
     def dose(self, t):
         """Definition of dosing scheme
         Depending on the defined dosing scheme, the function determines the released dosage X
