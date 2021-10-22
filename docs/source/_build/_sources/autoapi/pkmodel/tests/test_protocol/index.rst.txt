@@ -1,0 +1,31 @@
+:py:mod:`pkmodel.tests.test_protocol`
+=====================================
+
+.. py:module:: pkmodel.tests.test_protocol
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.tests.test_protocol.ProtocolTest
+
+
+
+
+.. py:class:: ProtocolTest(methodName='runTest')
+
+   Bases: :py:obj:`unittest.TestCase`
+
+   Tests the :class:`Protocol` class.
+
+   .. py:method:: test_create(self)
+
+      Tests Protocol creation.
+
+
+

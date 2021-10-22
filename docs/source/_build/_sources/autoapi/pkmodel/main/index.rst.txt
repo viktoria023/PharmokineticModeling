@@ -1,0 +1,84 @@
+:py:mod:`pkmodel.main`
+======================
+
+.. py:module:: pkmodel.main
+
+.. autoapi-nested-parse::
+
+   Where all the files are imported and ran
+
+
+
+Module Contents
+---------------
+
+.. py:data:: _vars
+   
+
+   
+
+.. py:data:: vars
+   
+
+   
+
+.. py:data:: protocol
+   
+
+   
+
+.. py:data:: Q_p1
+   
+
+   
+
+.. py:data:: V_c
+   
+
+   
+
+.. py:data:: V_p1
+   
+
+   
+
+.. py:data:: Cl
+   
+
+   
+
+.. py:data:: x
+   
+
+   
+
+.. py:data:: k_a
+   
+
+   
+
+.. py:data:: scheme
+   
+
+   
+
+.. py:data:: stop
+   
+
+   
+
+.. py:data:: tps
+   
+
+   
+
+.. py:data:: modelClass
+   
+
+   
+
+.. py:data:: solution
+   
+
+   
+

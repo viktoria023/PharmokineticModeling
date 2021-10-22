@@ -2,31 +2,35 @@
 # Solution class
 #
 import numpy as np
-import scipy
+import scipy.integrate
 #from model import *
 import matplotlib.pylab as plt
 
 class Solution:
-    """
-        A Pharmokinetic (PK) model solution
-    """
-    #def __init__(self, value=44):
-    #    self.value = value
+    """A Pharmokinetic (PK) model solution.
 
-    def __init__(self) -> None:
-        pass
+    Parameters
+    ----------
+
+    :param value:  optional, numeric, an example parameter to test if class can be called correctly
+    
+    """
+    def __init__(self, value=44):
+        self.value = value
 
     def solver_iv(self, modelClass):   
-        """A solver for the iv model
-        Takes the model and calculates the concentration changes as a function of the time
+
+        """A solver for the iv model.
+
+        Takes a specific initialization of the model and calculates the concentration time course.
 
         Parameters
-        ___________
+        ----------
 
-        modelClass: class, an object of the type model. Defined in main file and 
-        has attribute .ivModel that takes t and y as input
+        :object modelClass: required, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
 
-        :returns: file with time and concentrations at given time for all compartments in file 'sol'
+        :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
+
         """ 
         t_eval = np.linspace(0, 1, 1000)
         y0 = np.array([0.0, 0.0])
@@ -39,14 +43,14 @@ class Solution:
         return sol
 
     def solver_sc(self, modelClass):
-        """A solver for the sc model
-        Takes the model and calculates the concentration changes as a function of the time
+        """A solver for the sc model.
+
+        Takes a specific initialization of the model and calculates the concentration time course.
 
         Parameters
-        ___________
+        ----------
 
-        modelClass: class, an object of the type model. Defined in main file and 
-        has attribute .scModel that takes t and y as input
+        :object modelClass: required, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
 
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
         """
@@ -62,16 +66,17 @@ class Solution:
 
     #fig = plt.figure()
     def plotter(self, sol, model_name, save="no"):
-        """
-        A method to visualise the ode solutions using the matplotlib library
+        """A method to visualise the ode solutions using the matplotlib library.
 
-        :parameters: 
-                sol, required, object : the ode solution returned by solution.solver_sc or solver_iv : 
-                save, required, string, yes or no- if yes, plot saved in PNG
-                model_name, string, required : "iv" or "sc" 
+        Parameters
+        ----------
+        :object sol: required, the ode solution returned by solution.solver_sc or .solver_iv : 
+        :param save: required, string, yes or no- if yes, plot saved in PNG
+        :param model_name: required, string : "iv" or "sc" 
 
         :returns: 
-                a plot window or a an output file, output_plot.png
+                a plot window or an output file, output_plot.png
+
         """
         self.sol = sol
         self.model_name = model_name

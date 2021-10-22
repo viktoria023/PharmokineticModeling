@@ -1,0 +1,19 @@
+:py:mod:`pkmodel.version_info`
+==============================
+
+.. py:module:: pkmodel.version_info
+
+
+Module Contents
+---------------
+
+.. py:data:: VERSION_INT
+   :annotation: = [1, 0, 0]
+
+   
+
+.. py:data:: VERSION
+   
+
+   
+

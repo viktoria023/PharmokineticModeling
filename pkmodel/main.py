@@ -15,8 +15,9 @@ modelClass = Model(None, UserVariables.Q_p1, UserVariables.V_c, UserVariables.V_
 solution=Solution()
 
 if UserVariables.protocol== 'iv':
-    solution.solver_iv(modelClass)
+    sols =solution.solver_iv(modelClass)
 
 elif UserVariables.protocol == 'sc':
-    solution.solver_sc(modelClass)
+    sols = solution.solver_sc(modelClass)
 
+solution.plotter(sols, 'iv', 'no')
