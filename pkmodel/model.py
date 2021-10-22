@@ -34,7 +34,7 @@ class Model:
     def instantaneous_dose(self,t):
         #Compute the dose function at time t for a instantaneous dosage scheme.
         #The dosage function is computed as a smooth approximation of a train of spikes 
-        s=0.05 #controls the width of each pek
+        s=0.02 #controls the width of each pek
         dose=0
         for t0 in self.tps:
             new_peak=self.X*np.exp(-(t-t0)**2/(2*s**2))
