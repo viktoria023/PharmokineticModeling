@@ -1,4 +1,5 @@
-# 2020-software-engineering-projects-pk
+# Small Software Engineering Project: Pharmokinetic Modelling
+# DTP 2021 - Group 5
 This repository solves pharmokinetic models when given the type of model and initial values. 
 
 **How to use the repository:**
@@ -11,4 +12,4 @@ The repository has a modular structure, with the user file input.txt being read 
 
 **Links:**
 
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/viktoria023/PharmokineticModeling/master/docs/source/_build/autoapi/pkmodel/model/index.html
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/viktoria023/PharmokineticModeling/master/docs/source/_build/index.html
