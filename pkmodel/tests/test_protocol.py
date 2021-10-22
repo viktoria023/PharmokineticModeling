@@ -13,7 +13,6 @@ class ProtocolTest(unittest.TestCase):
         """
         Tests Protocol creation.
         """
+
         #with self.assertRaises(TypeError):
         main = Protocol(test_file_1)
-                
-

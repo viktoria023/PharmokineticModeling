@@ -10,6 +10,7 @@ class ModelTest(unittest.TestCase):
         """
         Tests Dosage creation.
         """
+
         model1 = Model(42, 1.0, 1.0, 1.0, 1.0, 1.0, None, 1, None, None)
         
         #At the moment, function should return X = 1 for any value of t entered
@@ -25,5 +26,4 @@ class ModelTest(unittest.TestCase):
 
         #Other test
         self.assertEqual(model1.value, 42)
-
-    
+   

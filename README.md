@@ -9,7 +9,7 @@ python PharmokineticModeling.py
 
 **Developer info (how to get started working with this repository):**
 
-The repository has a modular structure, with the user file input.txt being read in the main.py file. The main file then calls the protocol file which allows to manipulate the dosage (ToDo) and returns only the parameters from the input file that are needed for the specified model (sc or iv). The main file then calls the model file using the output variables of the protocol file and returns the ODEs for the specified model. The output is used to call the solution. The solution class solves the model using the scipy solver and plots the timecourse using matplotlib.
+The repository has a modular structure, with the user file input.txt being read in the main.py file. The main file then calls the protocol class to process the input file.  The main file then initiates an object of type Model, that takes the user input as arguments. The model is ultimately solved by initiating an object of type Solution and using the appropriate solver to obtain the timecourse of the intracellular drug concentrations in all compartments. In order to solve the ODEs, th solvers use scipy solver and the final plots of the timecourse are created using matplotlib.
 
 **Links:**
 

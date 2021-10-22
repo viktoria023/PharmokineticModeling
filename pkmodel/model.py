@@ -1,7 +1,7 @@
 #
 # Model class
 #
-
+import numpy as np
 class Model:
     """A Pharmokinetic (PK) model.
 
@@ -19,7 +19,7 @@ class Model:
     :param stop:   required, [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
     :param tps:    required in 'dt' scheme, [h] float, timepoints of dose administration as specified by the user
     """
-    def __init__(self, value=42, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None):
+    def __init__(self, value=42, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None,  scheme=None, start=0,stop=None,tps=None):
         self.value = value
         self.Q_p1=Q_p1
         self.V_c=V_c
@@ -27,10 +27,26 @@ class Model:
         self.CL=CL
         self.X=X
         self.k_a=k_a
+        self.start=start
         self.stop=stop
         self.scheme=scheme
         self.tps=tps
-
+    def instantaneous_dose(self,t):
+        #Compute the dose function at time t for a instantaneous dosage scheme.
+        #The dosage function is computed as a smooth approximation of a train of spikes 
+        s=0.02 #controls the width of each pek
+        dose=0
+        for t0 in self.tps:
+            new_peak=self.X*np.exp(-(t-t0)**2/(2*s**2))
+            dose+=new_peak
+        return dose
+    def continous_dose(self,t):
+        #Compute the dose function at time t for a continous dosage scheme between a starting and stopping time.
+        #The dosage function is computed as a smooth approximation of a boxcar function 
+        k=20
+        sigmoid_1=self.X/(1+np.exp(-k*(t-self.start)))
+        sigmoid_2=-self.X/(1+np.exp(-k*(t-self.stop)))+self.X
+        return np.sqrt((sigmoid_1*sigmoid_2))
     def dose(self, t):
         """Definition of dosing scheme
         Depending on the defined dosing scheme, the function determines the released dosage X
@@ -42,16 +58,13 @@ class Model:
         
         :returns: float, amount of drug released at the specified timepoint t
         """
-        if self.scheme=='clt' and t<self.stop:
-            return self.X
-        elif self.scheme=='hlt':
-            if t%1==0 and t<self.stop:
-                return self.X
+        if self.scheme=='clt':
+            return self.continous_dose(t)
         elif self.scheme=='dt':
-            if t in self.tps:
-                return self.X
+            return self.instantaneous_dose(t)
         else:
-            return self.X
+            return 0    
+   
 
     def ivModel(self, t, y):
         """Setting up intravenous model
@@ -86,7 +99,7 @@ class Model:
         """
         q_c, q_p1, q_0 = y
         transition = self.Q_p1 * (q_c / self.V_c - q_p1 / self.V_p1)
-        dq0_dt = self.dose(t, self.X) - self.k_a*q_0
+        dq0_dt = self.dose(t) - self.k_a*q_0
         dqc_dt = self.k_a*q_0 - q_c / self.V_c * self.CL - transition
         dqp1_dt = transition
         return [dqc_dt, dqp1_dt, dq0_dt]
