@@ -2,7 +2,7 @@
 # Protocol class
 #
 import pandas as pd
-
+import numpy as np
 class Protocol:
     """A Pharmokinetic (PK) protocol
 
@@ -39,5 +39,5 @@ class Protocol:
         self.scheme = self.vars[7][1]
         self.start=float(self.vars[8][1])
         self.stop = float(self.vars[9][1])
-        self.tps = self.vars[10][1]
+        self.tps = np.fromstring(self.vars[10][1],sep=',')
 
