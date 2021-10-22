@@ -13,11 +13,13 @@ class Solution:
     ----------
 
     :param value:  optional, numeric, an example parameter to test if class can be called correctly
+    
     """
     def __init__(self, value=44):
         self.value = value
 
     def solver_iv(self, modelClass):   
+
         """A solver for the iv model.
 
         Takes a specific initialization of the model and calculates the concentration time course.
@@ -28,6 +30,7 @@ class Solution:
         :object modelClass: required, an object of the type Model. The specific instance of the object is initialized in the main file and passed to the function.
 
         :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
+
         """ 
         t_eval = np.linspace(0, 1, 1000)
         y0 = np.array([0.0, 0.0])
@@ -73,6 +76,7 @@ class Solution:
 
         :returns: 
                 a plot window or an output file, output_plot.png
+
         """
         self.sol = sol
         self.model_name = model_name
