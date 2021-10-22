@@ -10,4 +10,5 @@ Users will want to provide an input file 'input.txt', which contains the model t
 The repository has a modular structure, with the user file input.txt being read in the main.py file. The main file then calls the protocol file which allows to manipulate the dosage (ToDo) and returns only the parameters from the input file that are needed for the specified model (sc or iv). The main file then calls the model file using the output variables of the protocol file and returns the ODEs for the specified model. The output is used to call the solution. The solution class solves the model using the scipy solver and plots the timecourse using matplotlib.
 
 **Links:**
-API documentation created with Sphinx: https://rawgit.com/viktoria023/PharmokineticModeling/master/docs/source/_build/autoapi/pkmodel/model/index.html
+
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/viktoria023/PharmokineticModeling/master/docs/source/_build/autoapi/pkmodel/model/index.html
