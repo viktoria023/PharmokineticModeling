@@ -19,7 +19,7 @@ class Model:
     :param stop:   required, [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
     :param tps:    required in 'dt' scheme, [h] float, timepoints of dose administration as specified by the user
     """
-    def __init__(self, value=42, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None):
+    def __init__(self, value=42, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None,  scheme=None, start=0,stop=None,tps=None):
         self.value = value
         self.Q_p1=Q_p1
         self.V_c=V_c
@@ -27,6 +27,7 @@ class Model:
         self.CL=CL
         self.X=X
         self.k_a=k_a
+        self.start=start
         self.stop=stop
         self.scheme=scheme
         self.tps=tps
