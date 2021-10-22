@@ -20,4 +20,4 @@ if UserVariables.protocol== 'iv':
 elif UserVariables.protocol == 'sc':
     sols = solution.solver_sc(modelClass)
 
-solution.plotter(sols, 'iv', 'no')
+solution.plotter(modelClass,sols, 'iv', 'no')
