@@ -1,8 +1,9 @@
-from pkmodel import Protocol
+from protocol import Protocol
+import pandas as pd
 
 import unittest
 
-test_file_1 = 'test.csv'
+test_file_1 = 'pkmodel/input_template.csv'
 
 class ProtocolTest(unittest.TestCase):
     """
@@ -12,7 +13,6 @@ class ProtocolTest(unittest.TestCase):
         """
         Tests Protocol creation.
         """
-        with self.AssertRaises(TypeError):
-            main = Protocol(test_file_1)
-                
 
+        #with self.assertRaises(TypeError):
+        main = Protocol(test_file_1)
