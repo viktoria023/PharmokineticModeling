@@ -1,15 +1,18 @@
-import unittest
-import pkmodel as pk
+from pkmodel import Protocol
 
+import unittest
+
+test_file_1 = 'test.csv'
 
 class ProtocolTest(unittest.TestCase):
     """
     Tests the :class:`Protocol` class.
     """
-    def test_create(self):
+    def test_correct_protocol(self):
         """
         Tests Protocol creation.
         """
-        model = pk.Protocol()
-        self.assertEqual(model.value, 43)
+        with self.AssertRaises(TypeError):
+            main = Protocol(test_file_1)
+                
 
