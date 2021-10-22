@@ -67,7 +67,7 @@ class Model:
         k=20 #controls the level of approximation of a true rect function
         A=self.X/(self.stop-self.start) #level of the rect function
         sigmoid_1=A/(1+np.exp(-k*(t-self.start)))
-        sigmoid_2=-A/(1+np.exp(-k*(t-self.stop)))+A
+        sigmoid_2=-(A/(1+np.exp(-k*(t-self.stop))))+A
         return np.sqrt((sigmoid_1*sigmoid_2))
     def dose(self, t):
         """Definition of dosing scheme
