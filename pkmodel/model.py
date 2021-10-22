@@ -50,6 +50,8 @@ class Model:
         elif self.scheme=='dt':
             if t in self.tps:
                 return self.X
+        else:
+            return self.X
 
     def ivModel(self, t, y):
         """Setting up intravenous model

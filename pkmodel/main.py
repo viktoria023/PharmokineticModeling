@@ -34,10 +34,10 @@ Cl   = float(vars[4][1])
 x    = float(vars[5][1])
 k_a  = float(vars[6][1])
 scheme = vars[7][1]
-stop = vars[7][1]
-tps = vars[8][1]
+stop = float(vars[8][1])
+tps = vars[9][1]
 
-modelClass = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a,scheme,stop,tps)
+modelClass = Model(None,Q_p1,V_c,V_p1,Cl,x,k_a,stop,scheme,tps)
 
 solution=Solution()
 
