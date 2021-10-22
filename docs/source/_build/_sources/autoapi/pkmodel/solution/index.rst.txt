@@ -1,0 +1,65 @@
+:py:mod:`pkmodel.solution`
+==========================
+
+.. py:module:: pkmodel.solution
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.solution.Solution
+
+
+
+
+.. py:class:: Solution
+
+   A Pharmokinetic (PK) model solution
+
+   .. py:method:: solver_iv(self, modelClass)
+
+      A solver for the iv model
+      Takes the model and calculates the concentration changes as a function of the time
+
+      Parameters
+      ___________
+
+      modelClass: class, an object of the type model. Defined in main file and 
+      has attribute .ivModel that takes t and y as input
+
+      :returns: file with time and concentrations at given time for all compartments in file 'sol'
+
+
+   .. py:method:: solver_sc(self, modelClass)
+
+      A solver for the sc model
+      Takes the model and calculates the concentration changes as a function of the time
+
+      Parameters
+      ___________
+
+      modelClass: class, an object of the type model. Defined in main file and 
+      has attribute .scModel that takes t and y as input
+
+      :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
+
+
+   .. py:method:: plotter(self, sol, model_name, save='no')
+
+      A method to visualise the ode solutions using the matplotlib library
+
+      :parameters: 
+              sol, required, object : the ode solution returned by solution.solver_sc or solver_iv : 
+              save, required, string, yes or no- if yes, plot saved in PNG
+              model_name, string, required : "iv" or "sc" 
+
+      :returns: 
+              a plot window or a an output file, output_plot.png
+
+
+

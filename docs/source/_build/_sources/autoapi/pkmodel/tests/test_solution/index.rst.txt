@@ -1,0 +1,31 @@
+:py:mod:`pkmodel.tests.test_solution`
+=====================================
+
+.. py:module:: pkmodel.tests.test_solution
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.tests.test_solution.SolutionTest
+
+
+
+
+.. py:class:: SolutionTest(methodName='runTest')
+
+   Bases: :py:obj:`unittest.TestCase`
+
+   Tests the :class:`Solution` class.
+
+   .. py:method:: test_create(self)
+
+      Tests Solution creation.
+
+
+
