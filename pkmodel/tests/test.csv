@@ -6,6 +6,6 @@ V_p1,1
 CL,1
 X,1
 k_a,1
-scheme,None
-stop,None
-tps,None
+scheme,
+stop,0.8
+tps=None

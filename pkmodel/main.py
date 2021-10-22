@@ -8,7 +8,7 @@ from protocol import Protocol
 import pandas as pd
 
 #Imports csv and stores as pandas data frame
-UserVariables = Protocol("pkmodel/input_template.csv")
+UserVariables = Protocol("input_template.csv")
 
 modelClass = Model(None, UserVariables.Q_p1, UserVariables.V_c, UserVariables.V_p1, UserVariables.Cl, UserVariables.x, UserVariables.k_a, UserVariables.scheme, UserVariables.stop, UserVariables.tps)
 
