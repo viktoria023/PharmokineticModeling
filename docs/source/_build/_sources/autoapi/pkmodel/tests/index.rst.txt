@@ -1,0 +1,17 @@
+:py:mod:`pkmodel.tests`
+=======================
+
+.. py:module:: pkmodel.tests
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   test_model/index.rst
+   test_protocol/index.rst
+   test_solution/index.rst
+
+

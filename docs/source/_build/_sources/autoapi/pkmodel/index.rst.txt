@@ -1,0 +1,186 @@
+:py:mod:`pkmodel`
+=================
+
+.. py:module:: pkmodel
+
+.. autoapi-nested-parse::
+
+   pkmodel is a Pharmokinetic modelling library.
+
+   It contains functionality for creating, solving, and visualising the solution
+   of Parmokinetic (PK) models
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   tests/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   main/index.rst
+   model/index.rst
+   protocol/index.rst
+   solution/index.rst
+   version_info/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.Model
+   pkmodel.Protocol
+   pkmodel.Solution
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.VERSION_INT
+   pkmodel.VERSION
+
+
+.. py:data:: VERSION_INT
+   :annotation: = [1, 0, 0]
+
+   
+
+.. py:data:: VERSION
+   
+
+   
+
+.. py:class:: Model(value, Q_p1=1.0, V_c=1.0, V_p1=1.0, CL=1.0, X=1.0, k_a=None, stop=None, scheme=None, tps=None)
+
+   A Pharmokinetic (PK) model
+
+   Parameters
+   ----------
+
+   value:  numeric, an example parameter to test if class can be called correctly
+   Q_p1:   [mL/h] float, the transition rate between central compartment and peripheral compartment 1
+   V_c:    [mL] float, the volume of the central compartment
+   V_p1:   [mL] float, the volume of the first peripheral compartment
+   CL:     [mL/h] float, the clearance/elimination rate from the central compartment
+   X:      [ng] float, the amount of drug administered per injection
+   k_a:     [/h] float is the absorption rate, only used for the sc dosing
+   scheme: ['clt','hlt','dt'] pattern of dose administration as specified by user. clt = instantaneous limited time, hlt = hourly limited time, dt = defined time points
+   stop:   [h] float, timepoint at which injection stops. Only used in 'ilt' and 'hlt' scheme
+   tps:    [h] float, timepoints of dose administration as specified by the user. Only used in 'dt' scheme
+
+   .. py:method:: dose(t, self)
+
+      Definition of dosing scheme
+      Depending on the defined dosing scheme, the function determines the released dosage X
+      at the  specified timepoint. 
+
+      Parameters
+      ___________
+      t: [h] float, timepoint tested by dose function
+
+      :returns: float, amount of drug released at the specified timepoint t
+
+
+   .. py:method:: ivModel(t, y, self)
+
+      Setting up intravenous model
+      Sets up 2-compartment model 
+
+      Parameters
+      ___________
+      t: [h] float, current timepoint 
+      y: [ng, ng] list, current amount of drug in the compartments
+
+      :returns: list with change of drug concentrations in respective compartments as a derivative of the time
+
+
+   .. py:method:: scModel(t, y, self)
+
+      Setting up subcatenous model
+      Sets up 3-compartment model, with inital compartment giving off the drug to the central compartment at rate k_a
+
+      Parameters
+      ___________
+      t: [h] float, current timepoint 
+      y: [ng, ng, ng] list, current amount of drug in the compartments
+
+      :returns: list with change of drug concentrations in respective compartments as a derivative of the time
+
+
+
+.. py:class:: Protocol(value=43)
+
+   A Pharmokinetic (PK) protocol
+
+   Parameters
+   ----------
+
+   value: numeric, optional
+       an example paramter
+
+
+
+.. py:class:: Solution
+
+   A Pharmokinetic (PK) model solution
+
+   .. py:method:: solver_iv(self, modelClass)
+
+      A solver for the iv model
+      Takes the model and calculates the concentration changes as a function of the time
+
+      Parameters
+      ___________
+
+      modelClass: class, an object of the type model. Defined in main file and 
+      has attribute .ivModel that takes t and y as input
+
+      :returns: file with time and concentrations at given time for all compartments in file 'sol'
+
+
+   .. py:method:: solver_sc(self, modelClass)
+
+      A solver for the sc model
+      Takes the model and calculates the concentration changes as a function of the time
+
+      Parameters
+      ___________
+
+      modelClass: class, an object of the type model. Defined in main file and 
+      has attribute .scModel that takes t and y as input
+
+      :returns: bunch SciPy.integrate_ivp object containing arrays t (timepoints) and y (concentration changes)
+
+
+   .. py:method:: plotter(self, sol, model_name, save='no')
+
+      A method to visualise the ode solutions using the matplotlib library
+
+      :parameters: 
+              sol, required, object : the ode solution returned by solution.solver_sc or solver_iv : 
+              save, required, string, yes or no- if yes, plot saved in PNG
+              model_name, string, required : "iv" or "sc" 
+
+      :returns: 
+              a plot window or a an output file, output_plot.png
+
+
+

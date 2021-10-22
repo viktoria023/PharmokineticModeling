@@ -1,0 +1,31 @@
+:py:mod:`pkmodel.protocol`
+==========================
+
+.. py:module:: pkmodel.protocol
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pkmodel.protocol.Protocol
+
+
+
+
+.. py:class:: Protocol(value=43)
+
+   A Pharmokinetic (PK) protocol
+
+   Parameters
+   ----------
+
+   value: numeric, optional
+       an example paramter
+
+
+
