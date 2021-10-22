@@ -26,15 +26,4 @@ class ModelTest(unittest.TestCase):
         #Other test
         self.assertEqual(model1.value, 42)
 
-    def test_model_sc_1(self):
-        """
-        Tests Dosage creation.
-        """
-        model2 = Model(42, 1.0, 1.0, 1.0, 1.0, 1.0, None, 1, None, None)
-        
-        #Checks that the list returned has a size of 3
-        t2 = np.linspace(0, 1, 100)
-        y2 = np.array([0.0, 0.0, 0.0])
-        self.assertEqual(len(model2.scModel(t2,y2)), 3)
-
     
